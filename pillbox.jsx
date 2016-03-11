@@ -61,7 +61,7 @@ var Pillbox = React.createClass({
         }
     },
     closeMenu: function(){
-        this.setState({ isOpen: false});
+        //this.setState({ isOpen: false});
     },
     render: function(){
                 
