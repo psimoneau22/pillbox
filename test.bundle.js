@@ -157,7 +157,7 @@
 	        }
 	    },
 	    closeMenu: function () {
-	        //this.setState({ isOpen: false});
+	        this.setState({ isOpen: false });
 	    },
 	    render: function () {
 
@@ -187,17 +187,17 @@
 	                { className: "row" },
 	                React.createElement(
 	                    "div",
-	                    { className: "col-md-4" },
+	                    { className: "col-md-6" },
 	                    React.createElement(
 	                        "div",
 	                        { className: "input-group" },
-	                        React.createElement("input", { className: "form-control", ref: "input", type: "text", onChange: this.handleInput, value: this.state.value, onBlur: this.closeMenu }),
+	                        React.createElement("input", { className: "form-control", ref: "input", type: "text", onChange: this.handleInput, value: this.state.value }),
 	                        React.createElement(
 	                            "div",
 	                            { className: "input-group-btn" },
 	                            React.createElement(
 	                                "button",
-	                                { className: "btn btn-default dropdown", type: "button", onClick: this.handleDropdown, onBlur: this.closeMenu },
+	                                { className: "btn btn-default dropdown", type: "button", onClick: this.handleDropdown },
 	                                React.createElement("span", { className: "caret" })
 	                            )
 	                        )
@@ -215,8 +215,16 @@
 	            ),
 	            React.createElement(
 	                "div",
-	                { className: "row pillbox-selected-container" },
-	                selectedItems
+	                { className: "row" },
+	                React.createElement(
+	                    "div",
+	                    { className: "col-md-6" },
+	                    React.createElement(
+	                        "div",
+	                        { className: "row pillbox-selected-container" },
+	                        selectedItems
+	                    )
+	                )
 	            )
 	        );
 	    }

@@ -77,7 +77,7 @@ var Pillbox = React.createClass({
                         
         return  <div className="pillbox container">          
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                             <div className="input-group">
                                 <input className="form-control" ref="input" type="text" onChange={this.handleInput} value={this.state.value}  />
                                 <div className="input-group-btn">
@@ -88,8 +88,12 @@ var Pillbox = React.createClass({
                     </div>
                     <div className={dropdownClass}> 
                         <ul ref="results" className="dropdown-menu">{items}</ul>
-                    </div>   
-                    <div className="row pillbox-selected-container">{selectedItems}</div>
+                    </div>  
+                    <div className="row">
+                        <div className="col-md-6"> 
+                            <div className="row pillbox-selected-container">{selectedItems}</div>
+                        </div>
+                    </div>
                 </div>
     }    
 });
