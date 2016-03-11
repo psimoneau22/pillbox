@@ -1,18 +1,21 @@
 var webpack = require("webpack")
 var path = require("path");
+var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 
 module.exports = {
     entry: {
-        test: "./test"
+        vendor: ["react"],
+        test: "./src/test"
     },
     output: {
-        path: __dirname,
-        filename: "[name].bundle.js"
+        path: path.resolve(__dirname, "dist"),
+        filename: "[name].js"
     },
     module: {
         loaders: [
             {
-                test: /\.jsx?/,
+                include: path.resolve(__dirname, "src"),
+                test: /\.jsx/,
                 loader: "babel-loader",
                 query: {
                     presets: ["react"]
@@ -22,5 +25,12 @@ module.exports = {
     },
     resolve: {
         extensions: ["", ".js", ".jsx"]
-    }
+    },
+    plugins: [
+        new CommonsChunkPlugin({
+            name: "vendor",
+            filename: "[name].js"
+        })
+    ]
+    
 }

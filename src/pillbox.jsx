@@ -1,3 +1,6 @@
+var React = require('react');
+var ReactCssTransitionGroup = require('react-addons-css-transition-group');
+
 var PillboxItem = React.createClass({
     handleRemove: function(){
         this.props.onRemove(this.props.item);
@@ -38,41 +41,33 @@ var Pillbox = React.createClass({
         if(!this.state.selectedItems.some(function(current){
             return item.val == current.val;
         })){
-            this.state.selectedItems.push(item);
-            this.setState({ selectedItems: this.state.selectedItems, items: [], value: ""});
+            var newSelectedItems = this.state.selectedItems.concat([item]);
+            this.setState({ selectedItems: newSelectedItems, items: [], value: ""});
         }
-        this.closeMenu();
+        this.setState({ isOpen: false});
         this.refs.input.focus();
     },
     search: function(filterText) {
         this.props.search(filterText, this.handleSearchResult);
     },
-    handleSearchResult: function(data){
+    handleSearchResult: function(data) {
         this.setState({ items: data, isOpen: data.length > 0 });
     },
-    handleRemove: function(item){
-        var index = this.state.selectedItems.findIndex(function(current){
-           return current.val == item.val; 
-        });
-        
-        if(index >= 0){
-            this.state.selectedItems.splice(index, 1);
-            this.setState({selectedItems: this.state.selectedItems}); 
-        }
-    },
-    closeMenu: function(){
-        this.setState({ isOpen: false});
+    handleRemove: function(index){        
+        var newSelectedItems = this.state.selectedItems.slice(); 
+        newSelectedItems.splice(index, 1);
+        this.setState({selectedItems: newSelectedItems });         
     },
     render: function(){
                 
         var items = this.state.items.map(function(item, index){
-            return <li key={index} onClick={this.handleAddItem.bind(this, item)}><a href="#">{item.name}</a></li> 
+            return <li key={item.val} onClick={this.handleAddItem.bind(this, item)}><a href="#">{item.name}</a></li> 
         }.bind(this));      
           
         var dropdownClass = "dropdown" + (this.state.isOpen ? " open" : "");
         
         var selectedItems = this.state.selectedItems.map(function(item, index){
-            return <PillboxItem key={item.val} item={item} onRemove={this.handleRemove} />;
+            return <PillboxItem key={item.val} item={item} onRemove={this.handleRemove.bind(this, index)} />;
         }.bind(this));
                         
         return  <div className="pillbox container">          
@@ -82,7 +77,7 @@ var Pillbox = React.createClass({
                                 <input className="form-control" ref="input" type="text" onChange={this.handleInput} value={this.state.value}  />
                                 <div className="input-group-btn">
                                     <button className="btn btn-default dropdown" type="button" onClick={this.handleDropdown} ><span className="caret" /></button>
-                                </div>              
+                                </div>
                             </div> 
                         </div>              
                     </div>
@@ -91,7 +86,11 @@ var Pillbox = React.createClass({
                     </div>  
                     <div className="row">
                         <div className="col-md-6"> 
-                            <div className="row pillbox-selected-container">{selectedItems}</div>
+                            <div className="row pillbox-selected-container">
+                                <ReactCssTransitionGroup transitionName="slide" transitionEnterTimeout={500} transitionLeaveTimeout={500} >
+                                    {selectedItems}
+                                </ReactCssTransitionGroup>
+                            </div>
                         </div>
                     </div>
                 </div>
