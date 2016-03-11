@@ -61,7 +61,7 @@ var Pillbox = React.createClass({
         }
     },
     closeMenu: function(){
-        //this.setState({ isOpen: false});
+        this.setState({ isOpen: false});
     },
     render: function(){
                 
@@ -79,9 +79,9 @@ var Pillbox = React.createClass({
                     <div className="row">
                         <div className="col-md-4">
                             <div className="input-group">
-                                <input className="form-control" ref="input" type="text" onChange={this.handleInput} value={this.state.value} onBlur={this.closeMenu} />
+                                <input className="form-control" ref="input" type="text" onChange={this.handleInput} value={this.state.value}  />
                                 <div className="input-group-btn">
-                                    <button className="btn btn-default dropdown" type="button" onClick={this.handleDropdown} onBlur={this.closeMenu} ><span className="caret" /></button>
+                                    <button className="btn btn-default dropdown" type="button" onClick={this.handleDropdown} ><span className="caret" /></button>
                                 </div>              
                             </div> 
                         </div>              
