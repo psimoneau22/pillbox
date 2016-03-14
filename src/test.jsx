@@ -35,7 +35,7 @@ var Pillbox = require("./pillbox");
         );
     };
 
-    ReactDOM.render(<Pillbox search={handleSearch} />,    
+    ReactDOM.render(<Pillbox search={handleSearch} />,        
         document.getElementById("test")
     );
 })();
