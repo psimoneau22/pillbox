@@ -4,7 +4,7 @@ var Pillbox = require("./pillbox");
 
 (function(){
     var testData = [
-        { name:"test this", val: "val1" },
+        { name:"test thitats", val: "val1" },
         { name:"test that", val: "val2" },
         { name:"check something", val: "val3" },
         { name:"check something else", val: "val4" },
@@ -13,7 +13,7 @@ var Pillbox = require("./pillbox");
         { name:"there", val: "val7" }    
     ];
 
-    mockAjaxCall = function(url, data){
+    var mockAjaxCall = function(url, data){
         console.log("MockAjaxCall: " + url + " : " + JSON.stringify(data));
         var filter = data.filter;
         
@@ -35,7 +35,7 @@ var Pillbox = require("./pillbox");
         );
     };
 
-    ReactDOM.render(<Pillbox search={handleSearch} />,        
+    ReactDOM.render(<Pillbox search={handleSearch} label="Search Something" />,        
         document.getElementById("test")
     );
 })();
